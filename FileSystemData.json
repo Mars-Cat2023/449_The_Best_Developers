@@ -1,0 +1,36 @@
+{
+    "TestDirectory": {
+        "type": "folder",
+        "data": 1,
+        "children": {
+            "test1": {
+                "type": "folder",
+                "data": 1,
+                "children": {
+                    "otherDoc.txt": {
+                        "type": "file",
+                        "data": 1
+                    },
+                    "wildfile.txt": {
+                        "type": "file",
+                        "data": 1
+                    }
+                }
+            },
+            "test2": {
+                "type": "folder",
+                "data": 1,
+                "children": {
+                    "bestfile.txt": {
+                        "type": "file",
+                        "data": 1
+                    }
+                }
+            },
+            "doct2.txt": {
+                "type": "file",
+                "data": 1
+            }
+        }
+    }
+}
