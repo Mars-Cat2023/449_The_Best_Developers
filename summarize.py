@@ -39,7 +39,8 @@ file_extraction_agent_state = client.create_agent(
     tools=[file_extraction_tool.name]
 )
 
-file_path = "/Users/owenrejevich/Development/test/test.txt"
+# FILL THIS FIELD BEFORE RUNNING
+file_path = ""
 
 response = client.send_message(
     agent_id=file_extraction_agent_state.id,
