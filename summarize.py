@@ -32,6 +32,8 @@ file_tools = FileTools()
 
 file_extraction_tool = client.create_tool(FileTools.extract_file_content)
 
+# Comment this line out before running the program for the first time
+# Included to update the agent with new function when testing
 client.delete_agent(client.get_agent_id("file_extraction_agent"))
 
 file_extraction_agent_state = client.create_agent(
