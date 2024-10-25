@@ -47,3 +47,6 @@ for f in test:
 
 fileSystem = json.dumps(fileSystem, indent=4)
 print(fileSystem)
+
+FileSystemData = open("dataTable.json", "w")
+FileSystemData.write(fileSystem)
