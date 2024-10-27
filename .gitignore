@@ -4,3 +4,12 @@ openapi_openai.json
 testDirectory/
 testDirectoryCopy/
 test.py
+
+# Ignore your local output results
+# Please modify this into covering all the local .json here or just keep it like this
+
+# FileSystemData.json
+# combinedFileDataTable.json
+# dataTable.json
+
+*.json
