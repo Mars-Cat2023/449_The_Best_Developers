@@ -1,0 +1,52 @@
+{
+    "Chapter 4.pdf": {
+        "type": "file",
+        "path": "TestDirectory2",
+        "data": 1
+    },
+    "new_yorker.2024.09.16.pdf": {
+        "type": "file",
+        "path": "TestDirectory2",
+        "data": 1
+    },
+    "README.txt": {
+        "type": "file",
+        "path": "TestDirectory2",
+        "data": 1
+    },
+    "wired_2024.03.02.pdf": {
+        "type": "file",
+        "path": "TestDirectory2/folder2",
+        "data": 1
+    },
+    "new_yorker.2024.09.09.pdf": {
+        "type": "file",
+        "path": "TestDirectory2/folder2",
+        "data": 1
+    },
+    "TheEconomist.2024.04.27.pdf": {
+        "type": "file",
+        "path": "TestDirectory2/folder2",
+        "data": 1
+    },
+    "Chapter 5.pdf": {
+        "type": "file",
+        "path": "TestDirectory2/folder1",
+        "data": 1
+    },
+    "TheEconomist.2024.04.13.pdf": {
+        "type": "file",
+        "path": "TestDirectory2/folder1",
+        "data": 1
+    },
+    "TheEconomist.2024.04.20.pdf": {
+        "type": "file",
+        "path": "TestDirectory2/folder1",
+        "data": 1
+    },
+    "wired_2024.10.02.pdf": {
+        "type": "file",
+        "path": "TestDirectory2/folder1",
+        "data": 1
+    }
+}

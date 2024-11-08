@@ -1,0 +1,37 @@
+{
+    "shoe.txt": {
+        "type": "file",
+        "path": "TestDirectory3",
+        "data": 1
+    },
+    "tv.txt": {
+        "type": "file",
+        "path": "TestDirectory3",
+        "data": 1
+    },
+    "fish.txt": {
+        "type": "file",
+        "path": "TestDirectory3",
+        "data": 1
+    },
+    "bird.txt": {
+        "type": "file",
+        "path": "TestDirectory3/test1",
+        "data": 1
+    },
+    "apple.txt": {
+        "type": "file",
+        "path": "TestDirectory3/test1",
+        "data": 1
+    },
+    "dog.txt": {
+        "type": "file",
+        "path": "TestDirectory3/test2",
+        "data": 1
+    },
+    "lemon.txt": {
+        "type": "file",
+        "path": "TestDirectory3/test2",
+        "data": 1
+    }
+}
