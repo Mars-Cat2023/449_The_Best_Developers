@@ -1,6 +1,7 @@
 import os, json
 """
 This file creates the files structure in json format.  
+It directly access a local file system and walks through it, pulling file data. 
 """
 
 def createFile(name: str, data):
@@ -56,7 +57,7 @@ for f in test:
 fileSystem = json.dumps(fileSystem, indent=4)
 print(fileSystem)
 
-FileSystemData = open("FileSystemData3.json", "w")
+FileSystemData = open("FileSystemData3.json", "w") #NOTE: hard coded
 FileSystemData.write(fileSystem)
 
 # test = os.scandir(directory)
