@@ -1,14 +1,20 @@
 from letta import create_client
-import os
+from letta import EmbeddingConfig, LLMConfig
+
+import json
 
 
 client = create_client()
 
-# Uncomment to reset
+client.set_default_embedding_config(
+    EmbeddingConfig.default_config(model_name="letta")
+)
+client.set_default_llm_config(LLMConfig.default_config(model_name="letta"))
+
 # Comment out during initial run
+# Uncomment to reset
 client.delete_agent(client.get_agent_id("garbage_agent"))
 
-# create agent to detect garbage
 agent_name = "garbage_agent"
 
 # Uncomment during first run/reset
@@ -17,30 +23,32 @@ agent_state = client.create_agent(agent_name)
 agent_id = client.get_agent_id(agent_name)
 agent_state = client.get_agent(agent_id)
 
-# read all files and add to archival memory
-directory = "testDirectory/"
+filename = "combinedFileDataTable.json"
 
-for filename in os.listdir(directory):
-    file_path = os.path.join(directory, filename)
-    try:
-        with open(file_path) as file:
-            content = file.read()
-            # print(content + " #end#")
-            passage = client.insert_archival_memory(agent_id, content)
-            passage[0].doc_id = file_path
-            # print(passage)
 
-    except FileNotFoundError:
-        print(f"Error: File {file_path} does not exist.")
+def get_all_summaries(dic):
+    for key, value in dic.items():
+        if key == "summary":
+            yield value
+        elif isinstance(value, dict):
+            yield from get_all_summaries(value)
 
-    except Exception as e:
-        print(f"An error occurred while reading the file: {str(e)}")
+
+summaries = []
+
+with open(filename, "r") as f:
+    dic = json.load(f)
+
+    for x in get_all_summaries(dic):
+        summaries.append(x)
+
 
 # Getting deletion suggestion
+# Edit for number of deletion suggestions
 response = client.send_message(
     agent_id=agent_id,
     role="user",
-    message="Please give me the memory_id of one of the archival memories that you would recommend deleting.",
+    message=f"Please tell me which three entries in the list {summaries} you would recommend deleting.",
 )
 
 print(f"File Summary:\n{response.messages}")
