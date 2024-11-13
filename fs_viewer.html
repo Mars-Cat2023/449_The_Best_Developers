@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Directory Tree</title>
+    <style>
+        body {
+            margin: 0;
+            padding-top: 110px; /* Adjusted space for the fixed header and title */
+        }
+
+        ul, #tree {
+            list-style-type: none;
+        }
+
+        #tree {
+            margin: 0;
+            padding: 0 20px;
+        }
+
+        .folder {
+            font-weight: bold;
+            color: #2a2a2a;
+            cursor: pointer;
+        }
+
+        .file {
+            font-style: italic;
+            color: #1e90ff;
+        }
+
+        .highlight {
+            background-color: #ffd54f;
+            border-radius: 3px;
+            padding: 0 3px;
+        }
+
+        .current-highlight {
+            background-color: #ff9800;
+        }
+
+        li {
+            margin: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        li::before {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 5px;
+            border-left: 2px solid #ccc;
+            height: 100%;
+        }
+
+        li::after {
+            content: "";
+            position: absolute;
+            top: 25px;
+            left: 5px;
+            border-top: 2px solid #ccc;
+            width: 15px;
+        }
+
+        li:last-child::before {
+            height: 15px;
+        }
+
+        /* Hover effect for better readability */
+        li:hover > span {
+            background-color: #f0f0f0;
+            border-radius: 3px;
+            padding: 0 3px;
+        }
+
+        /* Fixed header for title, search, and navigation */
+        #header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #title {
+            padding: 10px 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Search bar and navigation container */
+        #search-container {
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Search bar styling */
+        #search-bar {
+            padding: 5px;
+            width: 100%;
+            max-width: 300px;
+            font-size: 16px;
+        }
+
+        /* Navigation buttons */
+        #prev, #next, #back {
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div id="header">
+    <div id="title">Directory Tree</div>
+    <div id="search-container">
+        <input type="text" id="search-bar" placeholder="Search..." />
+        <button id="prev">Previous</button>
+        <button id="next">Next</button>
+        <button id="back" style="display: none;">Return to Main Directory</button>
+    </div>
+</div>
+
+<ul id="tree"></ul>
+
+<script>
+    let currentIndex = -1;
+    let highlightedElements = [];
+    let treeData = null;  // Store the entire tree data
+    let historyStack = []; // Stack to keep track of navigation history
+
+    // Function to create the tree structure recursively
+    function createTree(container, obj) {
+        const ul = document.createElement('ul');
+        for (let key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                const li = document.createElement('li');
+                const span = document.createElement('span');
+
+                if (obj[key].type === 'folder') {
+                    span.textContent = "📁 " + key;  // Add folder icon
+                    span.classList.add('folder');
+                    li.appendChild(span);
+
+                    // Add click event to set this folder as the new root
+                    span.addEventListener('click', () => {
+                        if (obj[key].children) {
+                            historyStack.push(treeData); // Save the full tree data to the stack
+                            document.getElementById('back').style.display = 'inline'; // Show the Back button
+                            displayTree(obj[key].children); // Display only the subtree
+                        }
+                    });
+
+                    // Recursively add children if they exist
+                    if (obj[key].children) {
+                        createTree(li, obj[key].children);
+                    }
+                } else if (obj[key].type === 'file') {
+                    span.textContent = "📄 " + key;  // Add file icon
+                    span.classList.add('file');
+                    li.appendChild(span);
+                }
+
+                ul.appendChild(li);
+            }
+        }
+        container.appendChild(ul);
+    }
+
+    // Function to display the tree data in #tree container
+    function displayTree(data) {
+        const treeContainer = document.getElementById('tree');
+        treeContainer.innerHTML = ''; // Clear the container
+        createTree(treeContainer, data); // Build the tree structure
+    }
+
+    // Fetch JSON data and display the initial full tree
+    fetch('test.json')
+        .then(response => response.json())
+        .then(data => {
+            treeData = data; // Save the full tree data
+            displayTree(treeData); // Display the entire tree initially
+        })
+        .catch(error => console.error('Error loading JSON:', error));
+
+    // Function to highlight matching items
+    function highlightMatches() {
+        const searchValue = document.getElementById('search-bar').value.toLowerCase();
+        const items = document.querySelectorAll('#tree span');
+
+        // Clear previous highlights and reset navigation
+        highlightedElements.forEach(item => item.classList.remove('highlight', 'current-highlight'));
+        highlightedElements = [];
+        currentIndex = -1;
+
+        items.forEach(item => {
+            const itemName = item.textContent.toLowerCase().replace(/📁 |📄 /, ""); // Remove icon for comparison
+
+            // Check if the item's name starts with the search value
+            if (itemName.startsWith(searchValue) && searchValue !== "") {
+                item.classList.add('highlight');
+                highlightedElements.push(item);
+            }
+        });
+
+        // If there are matches, set the first match as the current one
+        if (highlightedElements.length > 0) {
+            currentIndex = 0;
+            updateCurrentHighlight();
+        }
+    }
+
+    // Function to update the current highlighted element
+    function updateCurrentHighlight() {
+        // Remove 'current-highlight' from all elements
+        highlightedElements.forEach(item => item.classList.remove('current-highlight'));
+
+        // Scroll to the current element and add 'current-highlight'
+        if (highlightedElements[currentIndex]) {
+            highlightedElements[currentIndex].classList.add('current-highlight');
+            highlightedElements[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+
+    // Navigate to the previous match
+    document.getElementById('prev').addEventListener('click', () => {
+        if (highlightedElements.length > 0) {
+            currentIndex = (currentIndex - 1 + highlightedElements.length) % highlightedElements.length;
+            updateCurrentHighlight();
+        }
+    });
+
+    // Navigate to the next match
+    document.getElementById('next').addEventListener('click', () => {
+        if (highlightedElements.length > 0) {
+            currentIndex = (currentIndex + 1) % highlightedElements.length;
+            updateCurrentHighlight();
+        }
+    });
+
+    // Go back to the full tree
+    document.getElementById('back').addEventListener('click', () => {
+        displayTree(treeData); // Display the full tree
+        historyStack = []; // Clear the history stack
+        document.getElementById('back').style.display = 'none'; // Hide the Back button
+    });
+
+    // Attach event listener to the search bar
+    document.getElementById('search-bar').addEventListener('input', highlightMatches);
+</script>
+
+</body>
+</html>
