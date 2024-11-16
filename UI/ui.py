@@ -55,8 +55,11 @@ def get_chat():
     cb = []
     for i in responses:
         if i['role'] == 'assistant':
-            txt = json.loads(i['tool_calls'][0]['function']['arguments'])
-            cb.append({'id': i['id'], 'name': 'assistant', 'text': txt['message']})
+            print(i)
+            if i['tool_calls'][0]['function']['name'] == "send_message":
+                txt = json.loads(i['tool_calls'][0]['function']['arguments'])
+                cb.append({'id': i['id'], 'name': 'assistant', 'text': txt['message']})
+            print("\n")
         elif i['role'] == 'user':
             txt = json.loads(i['text'])
             if txt['type'] == 'user_message':
@@ -75,7 +78,7 @@ def post_message():
                'Content-Type': 'application/json'}
     comment_json = request.json
     # print(comment_json)
-    text = comment_json["text"]
+    text = comment_json["input"]
     data = {"messages":[{"role":"user","name":"human","text":text}],"stream_steps":True,"stream_tokens":True}
     response = requests.request("POST", url, headers=headers, data=json.dumps(data))
     return jsonify(**comment_json), 201
