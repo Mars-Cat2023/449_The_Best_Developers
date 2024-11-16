@@ -1,0 +1,198 @@
+body {
+    background-color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* max-height: 1080px; */
+}
+
+div {
+    color: black;
+}
+
+header {
+    font-family: 'OCR A Std', monospace;
+    color:goldenrod;
+    font-size: xx-large;
+    margin-bottom: 20px;
+}
+
+.chatbox-full {
+    width: 500px;
+    position: absolute;
+    border-left: 20px solid;
+    border-color: rgb(68, 68, 68);
+    padding: 10px;
+    right: 2%;
+    float: right;
+}
+
+.filesys {
+    width: 675px;
+    position: absolute;
+    float: left;
+    max-height: 600px;
+    overflow-y: scroll;
+    margin-left: 20px;
+}
+
+.chatbox-msgs {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.chat-form {
+    bottom: 1%;
+    font-size: 16px;
+    font-size: max(16px, 1em);
+    font-family: inherit;
+    padding: 0.25em 0.5em;
+    background-color: #fff;
+    border: 2px solid white;
+    border-radius: 4px;
+}
+
+.chat-form-box {
+    width: 95%;
+    bottom: 1%;
+    font-size: 16px;
+    font-size: max(16px, 1em);
+    font-family: inherit;
+    padding: 0.25em 0.5em;
+    background-color: #fff;
+    border: 2px solid white;
+    border-radius: 4px;
+}
+
+.message {
+    color:aqua;
+    /* border-color: darkslateblue; */
+    background-color: darkcyan;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.message .message-text {
+    color:green;
+}
+
+span {
+    color: white;
+}
+
+body {
+    margin: 0;
+    padding-top: 110px; /* Adjusted space for the fixed header and title */
+}
+
+ul, #tree {
+    list-style-type: none;
+}
+
+#tree {
+    margin: 0;
+    padding: 0 20px;
+}
+
+.folder {
+    font-weight: bold;
+    color: darkcyan;
+    cursor: pointer;
+}
+
+.file {
+    font-style: italic;
+    color: aqua;
+}
+
+.highlight {
+    background-color: #ffd54f;
+    border-radius: 3px;
+    padding: 0 3px;
+}
+
+.current-highlight {
+    background-color: #ff9800;
+}
+
+li {
+    margin: 8px 0;
+    padding-left: 25px;
+    position: relative;
+}
+
+li::before {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 5px;
+    border-left: 2px solid #ccc;
+    height: 100%;
+}
+
+li::after {
+    content: "";
+    position: absolute;
+    top: 25px;
+    left: 5px;
+    border-top: 2px solid #ccc;
+    width: 15px;
+}
+
+li:last-child::before {
+    height: 15px;
+}
+
+/* Hover effect for better readability */
+li:hover > span {
+    background-color: #f0f0f0;
+    border-radius: 3px;
+    padding: 0 3px;
+}
+
+/* Fixed header for title, search, and navigation */
+#header {
+    /* position: fixed; */
+    top: 0;
+    /* width: 100%; */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+#title {
+    padding: 10px 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Search bar and navigation container */
+#search-container {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Search bar styling */
+#search-bar {
+    padding: 5px;
+    width: 100%;
+    max-width: 300px;
+    font-size: 16px;
+}
+
+button {
+    border-radius: 15px;
+    background-color: goldenrod;
+    border-width: 0px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+}
+
+#fileUploader {
+    position: absolute;
+    right: 10px;
+    top: 70px;
+}

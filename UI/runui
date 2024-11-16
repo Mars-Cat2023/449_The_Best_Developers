@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Stop on errors, print commands
+# See https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
+set -Eeuo pipefail
+set -x
+
+# if [ ! -f var/insta485.sqlite3 ]; then
+#     echo "Error: can't find database var/insta485.sqlite3"
+#     exit 1
+# fi
+flask --app ui --debug run --host 0.0.0.0 --port 8000

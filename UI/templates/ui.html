@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>FileMindr Chat</title>
+</head>
+
+<body>
+    <div class="filesys">
+        <div id="header">
+            <header><b>Directory Tree</b></header>
+            <div id="search-container">
+                <input type="text" id="search-bar" placeholder="Search..." />
+                <button id="prev">Previous</button>
+                <button id="next">Next</button>
+                <button id="back" style="display: none;">Return to Main Directory</button>
+            </div>
+        </div>
+
+        <ul id="tree"></ul>
+
+        <script src="{{ url_for('static', filename='js/filetree.js') }}"></script>
+
+        <div id="fileUploader"></div>
+    </div>
+
+    <div class="chatbox-full">
+        <header class="chat-header">
+            <b>FileMindr Chat</b>
+        </header>
+
+        <div id="reactEntry">
+            Loading ...
+            </div>
+            <!-- Load JavaScript -->
+            <script src="{{ url_for('static', filename='js/bundle.js') }}"></script>
+
+    </div>
+</body>
+</html>
