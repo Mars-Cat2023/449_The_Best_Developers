@@ -28,25 +28,27 @@ class GarbageSuggestion:
         path = ""
 
         summaries = []
-        files = []
+        paths = []
 
         def get_all_summaries(dic, path):
 
             for key, value in dic.items():
+                if key == "path":
+                    path = value
                 if key == "summary":
                     yield (value, path)
                 elif isinstance(value, dict):
                     path = key
                     yield from get_all_summaries(value, path)
 
-        with open(tableName, "r") as f:
+        with open(tablePath, "r") as f:
             dic = json.load(f)
 
             for x in get_all_summaries(dic, path):
                 summaries.append(x[0])
-                files.append(x[1])
+                paths.append(x[1])
 
-        return (summaries, files)
+        return (summaries, paths)
 
 
 garbage_tools = GarbageSuggestion()
@@ -59,9 +61,9 @@ agent_id = client.get_agent_id(agent_name)
 agent_state = client.get_agent(agent_id)
 
 # JSON table path
-tableName = "combinedFileDataTable.json"
+tableName = "owen_workspace/dataTable3.json"
 
-(summaries, files) = garbage_tools.garbage_suggestion_tool(tablePath=tableName)
+(summaries, paths) = garbage_tools.garbage_suggestion_tool(tablePath=tableName)
 
 # Number of deletion suggestions
 num = 3
@@ -70,7 +72,7 @@ num = 3
 response = client.send_message(
     agent_id=agent_id,
     role="user",
-    message=f"Please decide which {num} entries in the list {summaries} you would recommend deleting based on the content of their summaries. Do not tell me. Use the indices from that list and tell me the corresponding file names from the list {files} that I should delete. Only give me {num} files.",
+    message=f"Please decide which {num} entries in the list {summaries} you would recommend deleting based on the content of their summaries. Do not tell me. Use the indices from that list and tell me the corresponding file names from the list {paths} that I should delete. Only give me {num} files.",
 )
 
 print(f"File Summary:\n{response.messages}")
