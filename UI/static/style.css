@@ -196,3 +196,7 @@ button {
     right: 10px;
     top: 70px;
 }
+
+#directory-picker {
+    padding: 8px;
+}

@@ -6,6 +6,7 @@ from flask import redirect
 import requests
 import json
 import pathlib
+from create_table_summary import create_table 
 
 app = Flask(__name__)
 
@@ -17,6 +18,7 @@ def chatbox():
 
 # this is what handles file uploads + saves them
 # can change where the file is located here
+# NO LONGER NEEDED!
 @app.route("/upload", methods=['POST'])
 def upload_file():
     print(request.files)
@@ -35,9 +37,21 @@ def upload_file():
 
 # heres where we get the json for the filetree component
 # this should be easily configurable to return whatever json file we want
-@app.route("/filetree")
+@app.route("/filetree", methods=['GET'])
 def file_tree():
     with open('test.json') as f:
+        d = json.load(f)
+        # print(d)
+        return jsonify(**d), 201
+
+# ok here is where we handle loading the filetree into the json format
+@app.route("/filetree", methods=['POST'])
+def file_tree_create():
+    directory_json = request.json
+    # print(comment_json)
+    d_path = directory_json["input"]
+    create_table(d_path)
+    with open('curr_dir_org.json') as f:
         d = json.load(f)
         # print(d)
         return jsonify(**d), 201

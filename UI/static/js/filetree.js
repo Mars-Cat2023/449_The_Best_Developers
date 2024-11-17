@@ -33,6 +33,10 @@ function createTree(container, obj) {
                 span.textContent = "📄 " + key;  // Add file icon
                 span.classList.add('file');
                 li.appendChild(span);
+
+                span.addEventListener('click', () => {
+                    alert(obj[key].summary)
+                });
             }
 
             ul.appendChild(li);
@@ -121,3 +125,6 @@ document.getElementById('back').addEventListener('click', () => {
 
 // Attach event listener to the search bar
 document.getElementById('search-bar').addEventListener('input', highlightMatches);
+
+// Attach event listener to the search bar
+document.getElementById('directory-go').addEventListener('click', displayTree);
