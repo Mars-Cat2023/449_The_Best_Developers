@@ -23,7 +23,7 @@ def garbage_suggestion_tool(self):
     )
 
     # JSON table path
-    tableName = "combinedFileDataTable.json"
+    tableName = "dataTable3.json"
     path = ""
 
     summaries = []
@@ -57,13 +57,13 @@ def garbage_suggestion_tool(self):
 
     message = f"Please decide which {num} entries in the list {summaries} you would recommend deleting based on the content of their summaries. Do not tell me. Use the indices from that list and tell me the corresponding file names from the list {files} that I should delete. Only give me {num} files."
 
-    answer = background_client.send_message(
+    response = background_client.send_message(
         message=message, role="user", agent_id=agentState.id
     )
 
-    answer = answer.messages[1].function_call.arguments
+    response = response.messages[1].function_call.arguments
 
-    return answer
+    return response
 
 
 client = create_client()

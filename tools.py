@@ -119,7 +119,7 @@ def garbage_suggestion(self):
     )
 
     # JSON table path
-    tableName = "combinedFileDataTable.json"
+    tableName = "dataTable3.json"
     path = ""
 
     summaries = []
@@ -153,13 +153,121 @@ def garbage_suggestion(self):
 
     message = f"Please decide which {num} entries in the list {summaries} you would recommend deleting based on the content of their summaries. Do not tell me. Use the indices from that list and tell me the corresponding file names from the list {files} that I should delete. Only give me {num} files."
 
-    answer = background_client.send_message(
+    response = background_client.send_message(
         message=message, role="user", agent_id=agentState.id
     )
 
-    answer = answer.messages[1].function_call.arguments
+    response = response.messages[1].function_call.arguments
 
-    return answer
+    return response
+
+
+def query(self, keyword: str):
+    """
+    Extracts file summaries and their paths from a JSON data table.
+    If prompted to find files related to some keywords, use this function. DO NOT USE archival_memory_search.
+
+    Args:
+        keyword (str): The keyword the user wants to find files related to. This argument is required and must be filled. For example, if users say "I'm looking for a file related to fruits", set keyword to "fruits" when calling this function.
+
+    Returns:
+        tuple: A tuple containing a list of summaries and a list of corresponding paths.
+    """
+    import json
+    from letta import create_client, EmbeddingConfig, LLMConfig, ChatMemory
+
+    background_client = create_client()
+
+    background_client.set_default_embedding_config(
+        EmbeddingConfig.default_config(model_name="letta")
+    )
+    background_client.set_default_llm_config(
+        LLMConfig.default_config(model_name="letta")
+    )
+
+    tablePath = "dataTable3.json"
+
+    summaries = []
+    paths = []
+
+    def traverse_json(data, current_path=""):
+        if isinstance(data, dict):
+            for key, value in data.items():
+                new_path = f"{current_path}/{key}" if current_path else key
+                if key == "path" and isinstance(value, str):
+                    yield (None, value)
+                elif key == "summary" and isinstance(value, str):
+                    yield (value, current_path)
+                elif isinstance(value, (dict, list)):
+                    yield from traverse_json(value, new_path)
+        elif isinstance(data, list):
+            for item in data:
+                yield from traverse_json(item, current_path)
+
+    with open(tablePath, "r") as f:
+        data = json.load(f)
+        for summary, path in traverse_json(data):
+            if summary and path:
+                summaries.append(summary)
+                paths.append(path)
+
+    agent_name = "background_agent"
+
+    if background_client.get_agent_id(agent_name):
+        background_client.delete_agent(
+            background_client.get_agent_id(agent_name)
+        )
+
+    system_prompt = """
+    You are a helpful assistant that assists users in finding files based on their summaries.
+    When responding to queries, ONLY provide the file names and paths, NOT the summaries.
+    Return the file paths as bullet points, without any additional explanations.
+    Ensure that you ignore any past queries and only respond based on the most recent user request.
+    """
+
+    agent_state = background_client.create_agent(
+        name=agent_name,
+        # memory with human/persona blocks
+        memory=ChatMemory(human="Name: Sarah", persona=system_prompt),
+    )
+
+    for summary, path in zip(summaries, paths):
+        print(f"Inserting summary for file '{path}' into archival memory...")
+
+        # insert summary content
+        passage = background_client.insert_archival_memory(
+            agent_state.id, summary
+        )
+
+        # store file path
+        passage[0].metadata_ = {"file_path": path}
+        print(f"Inserted file with metadata: {passage[0].metadata_}")
+
+    # now allow user to provide description of the file they remember
+    user_query = f"I'm looking for a document related to {keyword}."
+    num_files_to_return = 3
+
+    # client.update_agent(agent_id, memory={"persona": system_prompt})
+    # Construct the message with summaries included
+    summaries_text = "\n".join(
+        [
+            f"Summary of {path}: {summary}"
+            for summary, path in zip(summaries, paths)
+        ]
+    )
+
+    response = background_client.send_message(
+        agent_id=agent_state.id,
+        role="user",
+        message=f"Search for files that best match the description: '{user_query}'. "
+        f"Here are the summaries of all files stored in the archival memory:\n\n{summaries_text}\n\n"
+        f"Return the top {num_files_to_return} files based on their summaries and relevance to the query. "
+        f"Only provide the file names and paths, not the summaries. DO NOT SAY ANYTHING OTHER THAN LIST THE FILES THAT MATCH THE USER's file description. JUST GIVE THE FILES THAT MATCH AS BULLET POINTS, AND GIVE THE FILE PATHS",
+    )
+
+    response = response.messages[1].function_call.arguments
+
+    return response
 
 
 def sort_FS(self, mode: str):
