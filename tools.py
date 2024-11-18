@@ -129,6 +129,8 @@ def garbage_suggestion(self):
     def get_all_summaries(dic, path):
 
         for key, value in dic.items():
+            if key == "path":
+                path = value
             if key == "summary":
                 yield (value, path)
             elif isinstance(value, dict):
