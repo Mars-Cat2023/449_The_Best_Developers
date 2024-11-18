@@ -8,6 +8,7 @@ from letta import AgentState
 # extract_file_content
 # summarize_file_content
 # garbage_suggestion
+# query
 # sort_FS
 # sort_FS1
 # sort_FS2
@@ -1022,3 +1023,49 @@ def sort_FS3(
 
     # NOTE: return background agent output to user
     return answer
+
+
+client = create_client()
+
+client.set_default_embedding_config(
+    EmbeddingConfig.default_config(model_name="letta")
+)
+client.set_default_llm_config(LLMConfig.default_config(model_name="letta"))
+
+extract_tool = client.create_tool(extract_file_content)
+summarize_tool = client.create_tool(summarize_file_content)
+garbage_tool = client.create_tool(garbage_suggestion)
+query_tool = client.create_tool(query)
+sort_FS_tool1 = client.create_tool(sort_FS1)
+sort_FS_tool2 = client.create_tool(sort_FS2)
+sort_FS_tool3 = client.create_tool(sort_FS3)
+
+agent_name = "FileMindr"
+
+# tool_list = [
+#     extract_tool.name,
+#     summarize_tool.name,
+#     garbage_tool.name,
+#     query_tool.name,
+#     sort_FS_tool1.name,
+#     sort_FS_tool2.name,
+#     sort_FS_tool3.name,
+# ]
+
+try:
+    agent_state = client.create_agent(agent_name)
+except ValueError:
+    agent_id = client.get_agent_id(agent_name)
+    client.delete_agent(agent_id)
+    agent_state = client.create_agent(
+        agent_name,
+        tools=[
+            extract_tool.name,
+            summarize_tool.name,
+            garbage_tool.name,
+            query_tool.name,
+            sort_FS_tool1.name,
+            sort_FS_tool2.name,
+            sort_FS_tool3.name,
+        ],
+    )
