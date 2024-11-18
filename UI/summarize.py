@@ -42,7 +42,7 @@ class FileTools:
                 return None
 
             # Limit the content to the first 1000 characters (or any number you prefer)
-            max_length = 1000
+            max_length = 50
             content_snippet = content[:max_length]
             
             print(f"Extracted content snippet from {file_path}")

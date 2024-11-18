@@ -53,7 +53,7 @@ function newTree() {
     return console.error('Error loading JSON:', error);
   });
   var tr = document.getElementById('new-filesys-msg');
-  tr.innerHTML = 'Proposed new organization:';
+  tr.innerHTML = 'New organization:';
 }
 function ChatForm(_ref) {
   var setMessages = _ref.setMessages;

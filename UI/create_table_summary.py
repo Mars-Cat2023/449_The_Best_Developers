@@ -5,6 +5,7 @@ from letta import EmbeddingConfig, LLMConfig, create_client
 
 def createFile(data, location):
         file_tools = FileTools()
+        # print("location: ", location)
         response = file_tools.summarize_file_content(location)
         file = {
             "type" : "file",
@@ -36,8 +37,6 @@ def create_table(directory):
     # print(client.get_agent(agent_name="file_extraction_agent"))
     if client.get_agent_id(agent_name="file_extraction_agent"):
         client.delete_agent(client.get_agent_id("file_extraction_agent"))
-    # create a new agent
-    agent_state = client.create_agent()
 
     file_tools = FileTools()
 
@@ -48,8 +47,10 @@ def create_table(directory):
         tools=[file_extraction_tool.name]
     )
 
-    test = os.walk(directory)
+    # print(os.getcwd(), '../' + directory)
+    directory = '../' + directory
 
+    test = os.walk(directory)
 
     fileSystem = {}
     initialdir = ''
@@ -61,6 +62,9 @@ def create_table(directory):
     extrabit = "/".join(t)
     # print("extrabit: ", extrabit)
     fileSystem = {initialdir : createFolder(initialdir,1)}
+
+    dataTable = {}
+
     for f in test:
         
         cwd = f[0].replace(extrabit, '')
@@ -81,15 +85,15 @@ def create_table(directory):
             children = currentFolder['children']
             children[folder] = createFolder(folder, 1)
             
-
         #add files
         for file in files:
             children = currentFolder['children']
-            file_path = os.path.join(extrabit, f[0], file)
+            # file_path = os.path.join(extrabit, f[0], file)
+            file_path = os.path.join(f[0], file)
             children[file] = createFile(1, file_path)
-
-        #print(os.stat(f[0]))
-        #print('--------------')
+            #---- Data Table Section ----
+            dataTable[file] = children[file]
+            #----------------------------
 
     fileSystem = json.dumps(fileSystem, indent=4)
     print(fileSystem)
@@ -97,6 +101,13 @@ def create_table(directory):
     FileSystemData = open("curr_dir_org.json", "w")
     FileSystemData.write(fileSystem)
 
+    dataTable = json.dumps(dataTable, indent=4)
+    print(dataTable)
+
+    dataTableFILE = open("dataTable3.json", "w")
+    dataTableFILE.write(dataTable)
+
+    #----Data Table----
 
 
 
