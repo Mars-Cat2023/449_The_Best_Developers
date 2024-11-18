@@ -7,10 +7,17 @@ import requests
 import json
 import pathlib
 from create_table_summary import create_table 
+from letta import EmbeddingConfig, LLMConfig, create_client
 
 app = Flask(__name__)
 
-agentname = "agent-a70f49e9-ed6d-48d4-ac04-26ec4c2908fa"
+client = create_client()
+
+# set automatic defaults for LLM/embedding config
+client.set_default_llm_config(LLMConfig.default_config(model_name="letta"))
+client.set_default_embedding_config(EmbeddingConfig.default_config(model_name="text-embedding-ada-002"))
+
+agentname = client.get_agent_id(agent_name="interfaceAgent")# "agent-a70f49e9-ed6d-48d4-ac04-26ec4c2908fa"
 
 @app.route("/")
 def chatbox():
@@ -55,6 +62,15 @@ def file_tree_create():
         d = json.load(f)
         # print(d)
         return jsonify(**d), 201
+    
+# this is what gets the new filetree when you want to view a proposed new organization from the ui
+@app.route("/newfiletree", methods=['POST'])
+def file_tree_new():
+    with open('new_dir_org.json') as f:
+        d = json.load(f)
+        # print(d)
+        return jsonify(**d), 201
+
 
 # this provides a way to get chat messages and such
 # trying to do this with javascript alone wasnt working because it runs in the browser and 
@@ -67,12 +83,18 @@ def get_chat():
     response = requests.request("GET", url, headers=headers)
     responses = json.loads(response.text)
     cb = []
+    msgs_since_sort = 10
     for i in responses:
         if i['role'] == 'assistant':
             print(i)
-            if i['tool_calls'][0]['function']['name'] == "send_message":
+            fxn = i['tool_calls'][0]['function']['name']
+            if fxn == "send_message":
                 txt = json.loads(i['tool_calls'][0]['function']['arguments'])
                 cb.append({'id': i['id'], 'name': 'assistant', 'text': txt['message']})
+                msgs_since_sort = msgs_since_sort + 1
+            elif (fxn == 'sort_FS3') or (fxn == 'sort_FS2') or (fxn == 'sort_FS1'):
+                print("FOUND!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+                msgs_since_sort = 0
             print("\n")
         elif i['role'] == 'user':
             txt = json.loads(i['text'])
@@ -80,7 +102,13 @@ def get_chat():
                 cb.append({'id': i['id'], 'name': 'you', 'text': txt['message']})
     
     cb.reverse()
-    context = {"messages": cb}
+    # basically we need to keep track of how many msgs it has been since the sort call bc if it was a recent call we want the UI to show the proposed new files
+    if msgs_since_sort <= 2:
+        has_new_filesys = True
+    else:
+        has_new_filesys = False
+    context = {"messages": cb,
+               "new-filesys": has_new_filesys}
     # print(context['messages'])
     return jsonify(**context), 201
 

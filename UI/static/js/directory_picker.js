@@ -20,6 +20,7 @@ document.getElementById('directory-go').addEventListener('click', () => {
     })
     .catch(error => console.error('Error loading JSON:', error));
 
-    
+    const tr = document.getElementById('new-filesys-msg');
+    tr.innerHTML = '';
 });
 

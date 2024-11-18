@@ -200,3 +200,11 @@ button {
 #directory-picker {
     padding: 8px;
 }
+
+#new-filesys-msg {
+    color: goldenrod;
+    font-size: large;
+    padding: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+}

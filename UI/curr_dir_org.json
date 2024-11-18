@@ -1,40 +1,8 @@
 {
-    "newtest": {
+    "new_dir_org.json": {
         "type": "folder",
         "path": 1,
-        "data": "newtest",
-        "children": {
-            "fun": {
-                "type": "folder",
-                "path": 1,
-                "data": "fun",
-                "children": {
-                    "drone license.pdf": {
-                        "type": "file",
-                        "summary": "No content to summarize.",
-                        "path": "/home/zholly/449_The_Best_Developers/resources/newtest/fun/drone license.pdf",
-                        "data": 1
-                    },
-                    "Dickinson - _There's a certain slant of light_; _They shut me up in prose_.pdf": {
-                        "type": "file",
-                        "summary": "The document contains works by Emily Dickinson. These include the poem 'Wild nights - Wild nights!', which elaborates on the desire to spend wild nights with a loved one. 'Hope', another poem, personifies hope as a bird that sings ceaselessly in one's soul, in both good and bad times. Lastly, the beginning of 'There's a certain Slant of light' that characterizes an oppressive quality of Winter afternoon light, likening it to the weight of Cathedral Tunes, can be found here.",
-                        "path": "/home/zholly/449_The_Best_Developers/resources/newtest/fun/Dickinson - _There's a certain slant of light_; _They shut me up in prose_.pdf",
-                        "data": 1
-                    }
-                }
-            },
-            "Atlantic_2024.05.02.pdf": {
-                "type": "file",
-                "summary": "The document titled 'Clash of the Patriots' centers on a conflict within the Orthodox Church, wherein a Russian bishop backed by Kremlin's political might presents a potential division within the Church. The bishop, Patriarch Kirill, embarks on a critical mission to Istanbul. The outcome of Kirill's meeting with Ecumenical Patriarch Bartholomew, the archbishop of Constantinople, is yet to be revealed in the excerpt.",
-                "path": "/home/zholly/449_The_Best_Developers/resources/newtest/Atlantic_2024.05.02.pdf",
-                "data": 1
-            },
-            "Atlantic_2024.04.02.pdf": {
-                "type": "file",
-                "summary": "The document titled 'The Cystic-Fibrosis Breakthrough That Changed Everything' chronicles a significant advancement in cystic fibrosis treatment that essentially extended the lifespan of patients. A treatment called Trikafta, introduced in 2019, proved revolutionary, granting patients hope and more years to live. The therapeutic experience, often referred to as the 'Purge,' is likened to the recovery stage of a severe cold.",
-                "path": "/home/zholly/449_The_Best_Developers/resources/newtest/Atlantic_2024.04.02.pdf",
-                "data": 1
-            }
-        }
+        "data": "new_dir_org.json",
+        "children": {}
     }
 }

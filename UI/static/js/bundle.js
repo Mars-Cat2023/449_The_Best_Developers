@@ -31,6 +31,30 @@ __webpack_require__.r(__webpack_exports__);
 
 dayjs__WEBPACK_IMPORTED_MODULE_2___default().extend((dayjs_plugin_relativeTime__WEBPACK_IMPORTED_MODULE_3___default()));
 dayjs__WEBPACK_IMPORTED_MODULE_2___default().extend((dayjs_plugin_utc__WEBPACK_IMPORTED_MODULE_4___default()));
+function newTree() {
+  var d = "new_dir_org.json";
+  var json = JSON.stringify({
+    'input': d
+  });
+  console.log(json);
+  fetch('/newfiletree', {
+    credentials: "same-origin",
+    method: "post",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: json
+  }).then(function (response) {
+    return response.json();
+  }).then(function (data) {
+    treeData = data; // Save the full tree data
+    displayTree(treeData); // Display the entire tree initially
+  })["catch"](function (error) {
+    return console.error('Error loading JSON:', error);
+  });
+  var tr = document.getElementById('new-filesys-msg');
+  tr.innerHTML = 'Proposed new organization:';
+}
 function ChatForm(_ref) {
   var setMessages = _ref.setMessages;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
@@ -65,7 +89,7 @@ function ChatForm(_ref) {
       if (!response.ok) throw Error(response.statusText);
       return response.json();
     }).then(function () {
-      // update the commentslist on the ppage
+      // update the chatlist on the ppage
       url = "/api/v1/chat";
       fetch(url, {
         credentials: "same-origin"
@@ -75,6 +99,11 @@ function ChatForm(_ref) {
       }).then(function (data) {
         setMessages(data["messages"]);
         setSomething("");
+        if (data["new-filesys"]) {
+          // HERE IS WHERE WE UPDATE
+          newTree();
+          // we will need to grab  a component by id and change it, perhaps the new filetree structure and slap a new file in there
+        }
       })["catch"](function (error) {
         return console.log(error);
       });

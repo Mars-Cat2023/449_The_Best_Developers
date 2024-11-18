@@ -7,6 +7,30 @@ import utc from "dayjs/plugin/utc";
 dayjs.extend(relativeTime);
 dayjs.extend(utc);
 
+function newTree() {
+  let d = "new_dir_org.json"
+  const json = JSON.stringify({'input': d});
+    console.log(json)
+
+    fetch('/newfiletree', {
+        credentials: "same-origin",
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: json,
+      })
+    .then(response => response.json())
+    .then(data => {
+        treeData = data; // Save the full tree data
+        displayTree(treeData); // Display the entire tree initially
+    })
+    .catch(error => console.error('Error loading JSON:', error));
+
+    const tr = document.getElementById('new-filesys-msg');
+    tr.innerHTML = 'Proposed new organization:';
+}
+
 function ChatForm({ setMessages }) {
   const [something, setSomething] = useState("");
   function handleSubmit(e) {
@@ -39,7 +63,7 @@ function ChatForm({ setMessages }) {
         return response.json();
       })
       .then(() => {
-        // update the commentslist on the ppage
+        // update the chatlist on the ppage
         url = `/api/v1/chat`;
         fetch(url, { credentials: "same-origin" })
           .then((response) => {
@@ -49,6 +73,11 @@ function ChatForm({ setMessages }) {
           .then((data) => {
             setMessages(data["messages"])
             setSomething("")
+            if (data["new-filesys"]) {
+              // HERE IS WHERE WE UPDATE
+              newTree()
+              // we will need to grab  a component by id and change it, perhaps the new filetree structure and slap a new file in there
+            }
           })
           .catch((error) => console.log(error));
       })
