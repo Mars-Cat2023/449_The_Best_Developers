@@ -6,386 +6,23 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/openai/v1/assistants/": {
-      "post": {
-        "tags": [
-          "assistants"
-        ],
-        "summary": "Create Assistant",
-        "operationId": "create_assistant_openai_v1_assistants__post",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateAssistantRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OpenAIAssistant"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "assistants"
-        ],
-        "summary": "List Assistants",
-        "operationId": "list_assistants_openai_v1_assistants__get",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "description": "How many assistants to retrieve.",
-              "default": 1000,
-              "title": "Limit"
-            },
-            "description": "How many assistants to retrieve."
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "Order of assistants to retrieve (either 'asc' or 'desc').",
-              "default": "asc",
-              "title": "Order"
-            },
-            "description": "Order of assistants to retrieve (either 'asc' or 'desc')."
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.",
-              "title": "After"
-            },
-            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list."
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.",
-              "title": "Before"
-            },
-            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/OpenAIAssistant"
-                  },
-                  "title": "Response List Assistants Openai V1 Assistants  Get"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/openai/v1/assistants/{assistant_id}/files": {
-      "post": {
-        "tags": [
-          "assistants"
-        ],
-        "summary": "Create Assistant File",
-        "operationId": "create_assistant_file_openai_v1_assistants__assistant_id__files_post",
-        "parameters": [
-          {
-            "name": "assistant_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the assistant.",
-              "title": "Assistant Id"
-            },
-            "description": "The unique identifier of the assistant."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateAssistantFileRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AssistantFile"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "assistants"
-        ],
-        "summary": "List Assistant Files",
-        "operationId": "list_assistant_files_openai_v1_assistants__assistant_id__files_get",
-        "parameters": [
-          {
-            "name": "assistant_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the assistant.",
-              "title": "Assistant Id"
-            },
-            "description": "The unique identifier of the assistant."
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "description": "How many files to retrieve.",
-              "default": 1000,
-              "title": "Limit"
-            },
-            "description": "How many files to retrieve."
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "Order of files to retrieve (either 'asc' or 'desc').",
-              "default": "asc",
-              "title": "Order"
-            },
-            "description": "Order of files to retrieve (either 'asc' or 'desc')."
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.",
-              "title": "After"
-            },
-            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list."
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.",
-              "title": "Before"
-            },
-            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AssistantFile"
-                  },
-                  "title": "Response List Assistant Files Openai V1 Assistants  Assistant Id  Files Get"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/openai/v1/assistants/{assistant_id}": {
-      "get": {
-        "tags": [
-          "assistants"
-        ],
-        "summary": "Retrieve Assistant",
-        "operationId": "retrieve_assistant_openai_v1_assistants__assistant_id__get",
-        "parameters": [
-          {
-            "name": "assistant_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the assistant.",
-              "title": "Assistant Id"
-            },
-            "description": "The unique identifier of the assistant."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OpenAIAssistant"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "assistants"
-        ],
-        "summary": "Modify Assistant",
-        "operationId": "modify_assistant_openai_v1_assistants__assistant_id__post",
-        "parameters": [
-          {
-            "name": "assistant_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the assistant.",
-              "title": "Assistant Id"
-            },
-            "description": "The unique identifier of the assistant."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateAssistantRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OpenAIAssistant"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
+    "/v1/tools/{tool_id}": {
       "delete": {
         "tags": [
-          "assistants"
+          "tools"
         ],
-        "summary": "Delete Assistant",
-        "operationId": "delete_assistant_openai_v1_assistants__assistant_id__delete",
+        "summary": "Delete Tool",
+        "description": "Delete a tool by name",
+        "operationId": "delete_tool",
         "parameters": [
           {
-            "name": "assistant_id",
+            "name": "tool_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique identifier of the assistant.",
-              "title": "Assistant Id"
-            },
-            "description": "The unique identifier of the assistant."
+              "title": "Tool Id"
+            }
           }
         ],
         "responses": {
@@ -393,343 +30,7 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteAssistantResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/openai/v1/assistants/{assistant_id}/files/{file_id}": {
-      "get": {
-        "tags": [
-          "assistants"
-        ],
-        "summary": "Retrieve Assistant File",
-        "operationId": "retrieve_assistant_file_openai_v1_assistants__assistant_id__files__file_id__get",
-        "parameters": [
-          {
-            "name": "assistant_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the assistant.",
-              "title": "Assistant Id"
-            },
-            "description": "The unique identifier of the assistant."
-          },
-          {
-            "name": "file_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the file.",
-              "title": "File Id"
-            },
-            "description": "The unique identifier of the file."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AssistantFile"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "assistants"
-        ],
-        "summary": "Delete Assistant File",
-        "operationId": "delete_assistant_file_openai_v1_assistants__assistant_id__files__file_id__delete",
-        "parameters": [
-          {
-            "name": "assistant_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the assistant.",
-              "title": "Assistant Id"
-            },
-            "description": "The unique identifier of the assistant."
-          },
-          {
-            "name": "file_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the file.",
-              "title": "File Id"
-            },
-            "description": "The unique identifier of the file."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteAssistantFileResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/openai/v1/threads/": {
-      "post": {
-        "tags": [
-          "threads"
-        ],
-        "summary": "Create Thread",
-        "operationId": "create_thread_openai_v1_threads__post",
-        "parameters": [
-          {
-            "name": "user_id",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User Id"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateThreadRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OpenAIThread"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/openai/v1/threads/{thread_id}": {
-      "get": {
-        "tags": [
-          "threads"
-        ],
-        "summary": "Modify Thread",
-        "operationId": "modify_thread_openai_v1_threads__thread_id__get",
-        "parameters": [
-          {
-            "name": "thread_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the thread.",
-              "title": "Thread Id"
-            },
-            "description": "The unique identifier of the thread."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ModifyThreadRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OpenAIThread"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "threads"
-        ],
-        "summary": "Delete Thread",
-        "operationId": "delete_thread_openai_v1_threads__thread_id__delete",
-        "parameters": [
-          {
-            "name": "thread_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the thread.",
-              "title": "Thread Id"
-            },
-            "description": "The unique identifier of the thread."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteThreadResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/openai/v1/threads/{thread_id}/messages": {
-      "post": {
-        "tags": [
-          "threads",
-          "messages"
-        ],
-        "summary": "Create Message",
-        "operationId": "create_message_openai_v1_threads__thread_id__messages_post",
-        "parameters": [
-          {
-            "name": "thread_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the thread.",
-              "title": "Thread Id"
-            },
-            "description": "The unique identifier of the thread."
-          },
-          {
-            "name": "user_id",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User Id"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateMessageRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OpenAIMessage"
-                }
+                "schema": {}
               }
             }
           },
@@ -747,68 +48,20 @@
       },
       "get": {
         "tags": [
-          "threads",
-          "messages"
+          "tools"
         ],
-        "summary": "List Messages",
-        "operationId": "list_messages_openai_v1_threads__thread_id__messages_get",
+        "summary": "Get Tool",
+        "description": "Get a tool by ID",
+        "operationId": "get_tool",
         "parameters": [
           {
-            "name": "thread_id",
+            "name": "tool_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique identifier of the thread.",
-              "title": "Thread Id"
-            },
-            "description": "The unique identifier of the thread."
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "description": "How many messages to retrieve.",
-              "default": 1000,
-              "title": "Limit"
-            },
-            "description": "How many messages to retrieve."
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "Order of messages to retrieve (either 'asc' or 'desc').",
-              "default": "asc",
-              "title": "Order"
-            },
-            "description": "Order of messages to retrieve (either 'asc' or 'desc')."
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.",
-              "title": "After"
-            },
-            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list."
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.",
-              "title": "Before"
-            },
-            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list."
+              "title": "Tool Id"
+            }
           },
           {
             "name": "user_id",
@@ -833,63 +86,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ListMessagesResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/openai/v1/threads/{thread_id}/messages/{message_id}": {
-      "get": {
-        "tags": [
-          "threads",
-          "messages"
-        ],
-        "summary": "Retrieve Message",
-        "operationId": "retrieve_message_openai_v1_threads__thread_id__messages__message_id__get",
-        "parameters": [
-          {
-            "name": "thread_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the thread.",
-              "title": "Thread Id"
-            },
-            "description": "The unique identifier of the thread."
-          },
-          {
-            "name": "message_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the message.",
-              "title": "Message Id"
-            },
-            "description": "The unique identifier of the message."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OpenAIMessage"
+                  "$ref": "#/components/schemas/letta__schemas__tool__Tool"
                 }
               }
             }
@@ -906,35 +103,38 @@
           }
         }
       },
-      "post": {
+      "patch": {
         "tags": [
-          "threads",
-          "messages"
+          "tools"
         ],
-        "summary": "Modify Message",
-        "operationId": "modify_message_openai_v1_threads__thread_id__messages__message_id__post",
+        "summary": "Update Tool",
+        "description": "Update an existing tool",
+        "operationId": "update_tool",
         "parameters": [
           {
-            "name": "thread_id",
+            "name": "tool_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique identifier of the thread.",
-              "title": "Thread Id"
-            },
-            "description": "The unique identifier of the thread."
+              "title": "Tool Id"
+            }
           },
           {
-            "name": "message_id",
-            "in": "path",
-            "required": true,
+            "name": "user_id",
+            "in": "header",
+            "required": false,
             "schema": {
-              "type": "string",
-              "description": "The unique identifier of the message.",
-              "title": "Message Id"
-            },
-            "description": "The unique identifier of the message."
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
           }
         ],
         "requestBody": {
@@ -942,7 +142,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ModifyMessageRequest"
+                "$ref": "#/components/schemas/ToolUpdate"
               }
             }
           }
@@ -953,7 +153,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OpenAIMessage"
+                  "$ref": "#/components/schemas/letta__schemas__tool__Tool"
                 }
               }
             }
@@ -971,47 +171,39 @@
         }
       }
     },
-    "/openai/v1/threads/{thread_id}/messages/{message_id}/files/{file_id}": {
+    "/v1/tools/name/{tool_name}": {
       "get": {
         "tags": [
-          "threads",
-          "messages"
+          "tools"
         ],
-        "summary": "Retrieve Message File",
-        "operationId": "retrieve_message_file_openai_v1_threads__thread_id__messages__message_id__files__file_id__get",
+        "summary": "Get Tool Id",
+        "description": "Get a tool ID by name",
+        "operationId": "get_tool_id_by_name",
         "parameters": [
           {
-            "name": "thread_id",
+            "name": "tool_name",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique identifier of the thread.",
-              "title": "Thread Id"
-            },
-            "description": "The unique identifier of the thread."
+              "title": "Tool Name"
+            }
           },
           {
-            "name": "message_id",
-            "in": "path",
-            "required": true,
+            "name": "user_id",
+            "in": "header",
+            "required": false,
             "schema": {
-              "type": "string",
-              "description": "The unique identifier of the message.",
-              "title": "Message Id"
-            },
-            "description": "The unique identifier of the message."
-          },
-          {
-            "name": "file_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the file.",
-              "title": "File Id"
-            },
-            "description": "The unique identifier of the file."
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
           }
         ],
         "responses": {
@@ -1020,7 +212,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MessageFile"
+                  "type": "string",
+                  "title": "Response Get Tool Id By Name"
                 }
               }
             }
@@ -1038,124 +231,63 @@
         }
       }
     },
-    "/openai/v1/threads/{thread_id}/runs": {
-      "post": {
-        "tags": [
-          "threads",
-          "runs"
-        ],
-        "summary": "Create Run",
-        "operationId": "create_run_openai_v1_threads__thread_id__runs_post",
-        "parameters": [
-          {
-            "name": "thread_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the thread.",
-              "title": "Thread Id"
-            },
-            "description": "The unique identifier of the thread."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateRunRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OpenAIRun"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
+    "/v1/tools/": {
       "get": {
         "tags": [
-          "threads",
-          "runs"
+          "tools"
         ],
-        "summary": "List Runs",
-        "operationId": "list_runs_openai_v1_threads__thread_id__runs_get",
+        "summary": "List Tools",
+        "description": "Get a list of all tools available to agents belonging to the org of the user",
+        "operationId": "list_tools",
         "parameters": [
           {
-            "name": "thread_id",
-            "in": "path",
-            "required": true,
+            "name": "cursor",
+            "in": "query",
+            "required": false,
             "schema": {
-              "type": "string",
-              "description": "The unique identifier of the thread.",
-              "title": "Thread Id"
-            },
-            "description": "The unique identifier of the thread."
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
           },
           {
             "name": "limit",
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer",
-              "description": "How many runs to retrieve.",
-              "default": 1000,
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": 50,
               "title": "Limit"
-            },
-            "description": "How many runs to retrieve."
+            }
           },
           {
-            "name": "order",
-            "in": "query",
+            "name": "user_id",
+            "in": "header",
             "required": false,
             "schema": {
-              "type": "string",
-              "description": "Order of runs to retrieve (either 'asc' or 'desc').",
-              "default": "asc",
-              "title": "Order"
-            },
-            "description": "Order of runs to retrieve (either 'asc' or 'desc')."
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.",
-              "title": "After"
-            },
-            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list."
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.",
-              "title": "Before"
-            },
-            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list."
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
           }
         ],
         "responses": {
@@ -1166,9 +298,67 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/OpenAIRun"
+                    "$ref": "#/components/schemas/letta__schemas__tool__Tool"
                   },
-                  "title": "Response List Runs Openai V1 Threads  Thread Id  Runs Get"
+                  "title": "Response List Tools"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "tools"
+        ],
+        "summary": "Create Tool",
+        "description": "Create a new tool",
+        "operationId": "create_tool",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToolCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/letta__schemas__tool__Tool"
                 }
               }
             }
@@ -1186,19 +376,3350 @@
         }
       }
     },
-    "/openai/v1/threads/runs": {
+    "/v1/tools/add-base-tools": {
       "post": {
         "tags": [
-          "threads",
-          "runs"
+          "tools"
         ],
-        "summary": "Create Thread And Run",
-        "operationId": "create_thread_and_run_openai_v1_threads_runs_post",
+        "summary": "Add Base Tools",
+        "description": "Add base tools",
+        "operationId": "add_base_tools",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/letta__schemas__tool__Tool"
+                  },
+                  "title": "Response Add Base Tools"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sources/{source_id}": {
+      "get": {
+        "tags": [
+          "sources"
+        ],
+        "summary": "Get Source",
+        "description": "Get all sources",
+        "operationId": "get_source",
+        "parameters": [
+          {
+            "name": "source_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Source Id"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Source"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "sources"
+        ],
+        "summary": "Update Source",
+        "description": "Update the name or documentation of an existing data source.",
+        "operationId": "update_source",
+        "parameters": [
+          {
+            "name": "source_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Source Id"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SourceUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Source"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "sources"
+        ],
+        "summary": "Delete Source",
+        "description": "Delete a data source.",
+        "operationId": "delete_source",
+        "parameters": [
+          {
+            "name": "source_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Source Id"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sources/name/{source_name}": {
+      "get": {
+        "tags": [
+          "sources"
+        ],
+        "summary": "Get Source Id By Name",
+        "description": "Get a source by name",
+        "operationId": "get_source_id_by_name",
+        "parameters": [
+          {
+            "name": "source_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Source Name"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "title": "Response Get Source Id By Name"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sources/": {
+      "get": {
+        "tags": [
+          "sources"
+        ],
+        "summary": "List Sources",
+        "description": "List all data sources created by a user.",
+        "operationId": "list_sources",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Source"
+                  },
+                  "title": "Response List Sources"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "sources"
+        ],
+        "summary": "Create Source",
+        "description": "Create a new data source.",
+        "operationId": "create_source",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SourceCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Source"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sources/{source_id}/attach": {
+      "post": {
+        "tags": [
+          "sources"
+        ],
+        "summary": "Attach Source To Agent",
+        "description": "Attach a data source to an existing agent.",
+        "operationId": "attach_agent_to_source",
+        "parameters": [
+          {
+            "name": "source_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Source Id"
+            }
+          },
+          {
+            "name": "agent_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique identifier of the agent to attach the source to.",
+              "title": "Agent Id"
+            },
+            "description": "The unique identifier of the agent to attach the source to."
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Source"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sources/{source_id}/detach": {
+      "post": {
+        "tags": [
+          "sources"
+        ],
+        "summary": "Detach Source From Agent",
+        "description": "Detach a data source from an existing agent.",
+        "operationId": "detach_agent_from_source",
+        "parameters": [
+          {
+            "name": "source_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Source Id"
+            }
+          },
+          {
+            "name": "agent_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique identifier of the agent to detach the source from.",
+              "title": "Agent Id"
+            },
+            "description": "The unique identifier of the agent to detach the source from."
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Source"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sources/{source_id}/upload": {
+      "post": {
+        "tags": [
+          "sources"
+        ],
+        "summary": "Upload File To Source",
+        "description": "Upload a file to a data source.",
+        "operationId": "upload_file_to_source",
+        "parameters": [
+          {
+            "name": "source_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Source Id"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_upload_file_to_source"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sources/{source_id}/passages": {
+      "get": {
+        "tags": [
+          "sources"
+        ],
+        "summary": "List Passages",
+        "description": "List all passages associated with a data source.",
+        "operationId": "list_source_passages",
+        "parameters": [
+          {
+            "name": "source_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Source Id"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Passage"
+                  },
+                  "title": "Response List Source Passages"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sources/{source_id}/files": {
+      "get": {
+        "tags": [
+          "sources"
+        ],
+        "summary": "List Files From Source",
+        "description": "List paginated files associated with a data source.",
+        "operationId": "list_files_from_source",
+        "parameters": [
+          {
+            "name": "source_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Source Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "description": "Number of files to return",
+              "default": 1000,
+              "title": "Limit"
+            },
+            "description": "Number of files to return"
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Pagination cursor to fetch the next set of results",
+              "title": "Cursor"
+            },
+            "description": "Pagination cursor to fetch the next set of results"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FileMetadata"
+                  },
+                  "title": "Response List Files From Source"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sources/{source_id}/{file_id}": {
+      "delete": {
+        "tags": [
+          "sources"
+        ],
+        "summary": "Delete File From Source",
+        "description": "Delete a data source.",
+        "operationId": "delete_file_from_source",
+        "parameters": [
+          {
+            "name": "source_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Source Id"
+            }
+          },
+          {
+            "name": "file_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "File Id"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/agents/": {
+      "get": {
+        "tags": [
+          "agents"
+        ],
+        "summary": "List Agents",
+        "description": "List all agents associated with a given user.\nThis endpoint retrieves a list of all agents and their configurations associated with the specified user ID.",
+        "operationId": "list_agents",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Name of the agent",
+              "title": "Name"
+            },
+            "description": "Name of the agent"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "List of tags to filter agents by",
+              "title": "Tags"
+            },
+            "description": "List of tags to filter agents by"
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AgentState"
+                  },
+                  "title": "Response List Agents"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "agents"
+        ],
+        "summary": "Create Agent",
+        "description": "Create a new agent with the specified configuration.",
+        "operationId": "create_agent",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAgent"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentState"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/agents/{agent_id}/context": {
+      "get": {
+        "tags": [
+          "agents"
+        ],
+        "summary": "Get Agent Context Window",
+        "description": "Retrieve the context window of a specific agent.",
+        "operationId": "get_agent_context_window",
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Agent Id"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContextWindowOverview"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/agents/{agent_id}": {
+      "patch": {
+        "tags": [
+          "agents"
+        ],
+        "summary": "Update Agent",
+        "description": "Update an exsiting agent",
+        "operationId": "update_agent",
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Agent Id"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAgentState"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentState"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "agents"
+        ],
+        "summary": "Get Agent State",
+        "description": "Get the state of the agent.",
+        "operationId": "get_agent",
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Agent Id"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentState"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "agents"
+        ],
+        "summary": "Delete Agent",
+        "description": "Delete an agent.",
+        "operationId": "delete_agent",
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Agent Id"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/agents/{agent_id}/tools": {
+      "get": {
+        "tags": [
+          "agents"
+        ],
+        "summary": "Get Tools From Agent",
+        "description": "Get tools from an existing agent",
+        "operationId": "get_tools_from_agent",
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Agent Id"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/letta__schemas__tool__Tool"
+                  },
+                  "title": "Response Get Tools From Agent"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/agents/{agent_id}/add-tool/{tool_id}": {
+      "patch": {
+        "tags": [
+          "agents"
+        ],
+        "summary": "Add Tool To Agent",
+        "description": "Add tools to an existing agent",
+        "operationId": "add_tool_to_agent",
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Agent Id"
+            }
+          },
+          {
+            "name": "tool_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Tool Id"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentState"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/agents/{agent_id}/remove-tool/{tool_id}": {
+      "patch": {
+        "tags": [
+          "agents"
+        ],
+        "summary": "Remove Tool From Agent",
+        "description": "Add tools to an existing agent",
+        "operationId": "remove_tool_from_agent",
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Agent Id"
+            }
+          },
+          {
+            "name": "tool_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Tool Id"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentState"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/agents/{agent_id}/sources": {
+      "get": {
+        "tags": [
+          "agents"
+        ],
+        "summary": "Get Agent Sources",
+        "description": "Get the sources associated with an agent.",
+        "operationId": "get_agent_sources",
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Agent Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Source"
+                  },
+                  "title": "Response Get Agent Sources"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/agents/{agent_id}/memory/messages": {
+      "get": {
+        "tags": [
+          "agents"
+        ],
+        "summary": "Get Agent In Context Messages",
+        "description": "Retrieve the messages in the context of a specific agent.",
+        "operationId": "list_agent_in_context_messages",
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Agent Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/letta__schemas__message__Message-Output"
+                  },
+                  "title": "Response List Agent In Context Messages"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/agents/{agent_id}/memory": {
+      "get": {
+        "tags": [
+          "agents"
+        ],
+        "summary": "Get Agent Memory",
+        "description": "Retrieve the memory state of a specific agent.\nThis endpoint fetches the current memory state of the agent identified by the user ID and agent ID.",
+        "operationId": "get_agent_memory",
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Agent Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Memory"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "agents"
+        ],
+        "summary": "Update Agent Memory",
+        "description": "Update the core memory of a specific agent.\nThis endpoint accepts new memory contents (human and persona) and updates the core memory of the agent identified by the user ID and agent ID.",
+        "operationId": "update_agent_memory",
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Agent Id"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "title": "Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Memory"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/agents/{agent_id}/memory/recall": {
+      "get": {
+        "tags": [
+          "agents"
+        ],
+        "summary": "Get Agent Recall Memory Summary",
+        "description": "Retrieve the summary of the recall memory of a specific agent.",
+        "operationId": "get_agent_recall_memory_summary",
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Agent Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecallMemorySummary"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/agents/{agent_id}/memory/archival": {
+      "get": {
+        "tags": [
+          "agents"
+        ],
+        "summary": "Get Agent Archival Memory Summary",
+        "description": "Retrieve the summary of the archival memory of a specific agent.",
+        "operationId": "get_agent_archival_memory_summary",
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Agent Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArchivalMemorySummary"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/agents/{agent_id}/archival": {
+      "get": {
+        "tags": [
+          "agents"
+        ],
+        "summary": "Get Agent Archival Memory",
+        "description": "Retrieve the memories in an agent's archival memory store (paginated query).",
+        "operationId": "list_agent_archival_memory",
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Agent Id"
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Unique ID of the memory to start the query range at.",
+              "title": "After"
+            },
+            "description": "Unique ID of the memory to start the query range at."
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Unique ID of the memory to end the query range at.",
+              "title": "Before"
+            },
+            "description": "Unique ID of the memory to end the query range at."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "How many results to include in the response.",
+              "title": "Limit"
+            },
+            "description": "How many results to include in the response."
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Passage"
+                  },
+                  "title": "Response List Agent Archival Memory"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "agents"
+        ],
+        "summary": "Insert Agent Archival Memory",
+        "description": "Insert a memory into an agent's archival memory store.",
+        "operationId": "create_agent_archival_memory",
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Agent Id"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateArchivalMemory"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Passage"
+                  },
+                  "title": "Response Create Agent Archival Memory"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/agents/{agent_id}/archival/{memory_id}": {
+      "delete": {
+        "tags": [
+          "agents"
+        ],
+        "summary": "Delete Agent Archival Memory",
+        "description": "Delete a memory from an agent's archival memory store.",
+        "operationId": "delete_agent_archival_memory",
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Agent Id"
+            }
+          },
+          {
+            "name": "memory_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Memory Id"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/agents/{agent_id}/messages": {
+      "get": {
+        "tags": [
+          "agents"
+        ],
+        "summary": "Get Agent Messages",
+        "description": "Retrieve message history for an agent.",
+        "operationId": "list_agent_messages",
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Agent Id"
+            }
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Message before which to retrieve the returned messages.",
+              "title": "Before"
+            },
+            "description": "Message before which to retrieve the returned messages."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "description": "Maximum number of messages to retrieve.",
+              "default": 10,
+              "title": "Limit"
+            },
+            "description": "Maximum number of messages to retrieve."
+          },
+          {
+            "name": "msg_object",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "If true, returns Message objects. If false, return LettaMessage objects.",
+              "default": false,
+              "title": "Msg Object"
+            },
+            "description": "If true, returns Message objects. If false, return LettaMessage objects."
+          },
+          {
+            "name": "use_assistant_message",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "[Only applicable if msg_object is False] If true, returns AssistantMessage objects when the agent calls a designated message tool. If false, return FunctionCallMessage objects for all tool calls.",
+              "default": false,
+              "title": "Use Assistant Message"
+            },
+            "description": "[Only applicable if msg_object is False] If true, returns AssistantMessage objects when the agent calls a designated message tool. If false, return FunctionCallMessage objects for all tool calls."
+          },
+          {
+            "name": "assistant_message_function_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "[Only applicable if use_assistant_message is True] The name of the designated message tool.",
+              "default": "send_message",
+              "title": "Assistant Message Function Name"
+            },
+            "description": "[Only applicable if use_assistant_message is True] The name of the designated message tool."
+          },
+          {
+            "name": "assistant_message_function_kwarg",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "[Only applicable if use_assistant_message is True] The name of the message argument in the designated message tool.",
+              "default": "message",
+              "title": "Assistant Message Function Kwarg"
+            },
+            "description": "[Only applicable if use_assistant_message is True] The name of the message argument in the designated message tool."
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/letta__schemas__message__Message-Output"
+                      }
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "oneOf": [
+                          {
+                            "$ref": "#/components/schemas/SystemMessage-Output"
+                          },
+                          {
+                            "$ref": "#/components/schemas/UserMessage-Output"
+                          },
+                          {
+                            "$ref": "#/components/schemas/InternalMonologue"
+                          },
+                          {
+                            "$ref": "#/components/schemas/FunctionCallMessage"
+                          },
+                          {
+                            "$ref": "#/components/schemas/FunctionReturn"
+                          },
+                          {
+                            "$ref": "#/components/schemas/AssistantMessage-Output"
+                          }
+                        ],
+                        "discriminator": {
+                          "propertyName": "message_type",
+                          "mapping": {
+                            "system_message": "#/components/schemas/SystemMessage-Output",
+                            "user_message": "#/components/schemas/UserMessage-Output",
+                            "internal_monologue": "#/components/schemas/InternalMonologue",
+                            "function_call": "#/components/schemas/FunctionCallMessage",
+                            "function_return": "#/components/schemas/FunctionReturn",
+                            "assistant_message": "#/components/schemas/AssistantMessage-Output"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "title": "Response List Agent Messages"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "agents"
+        ],
+        "summary": "Send Message",
+        "description": "Process a user message and return the agent's response.\nThis endpoint accepts a message from a user and processes it through the agent.\nIt can optionally stream the response if 'stream_steps' or 'stream_tokens' is set to True.",
+        "operationId": "create_agent_message",
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Agent Id"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LettaRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "$ref": "#/components/schemas/LettaResponse"
+              },
+              "text/event-stream": {
+                "description": "Server-Sent Events stream"
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/agents/{agent_id}/messages/{message_id}": {
+      "patch": {
+        "tags": [
+          "agents"
+        ],
+        "summary": "Update Message",
+        "description": "Update the details of a message associated with an agent.",
+        "operationId": "update_agent_message",
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Agent Id"
+            }
+          },
+          {
+            "name": "message_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Message Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMessage"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/letta__schemas__message__Message-Output"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/models/": {
+      "get": {
+        "tags": [
+          "models",
+          "llms"
+        ],
+        "summary": "List Llm Backends",
+        "operationId": "list_models",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/LLMConfig"
+                  },
+                  "type": "array",
+                  "title": "Response List Models"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/models/embedding": {
+      "get": {
+        "tags": [
+          "models",
+          "llms"
+        ],
+        "summary": "List Embedding Backends",
+        "operationId": "list_embedding_models",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/EmbeddingConfig"
+                  },
+                  "type": "array",
+                  "title": "Response List Embedding Models"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/blocks/": {
+      "get": {
+        "tags": [
+          "blocks"
+        ],
+        "summary": "List Blocks",
+        "operationId": "list_memory_blocks",
+        "parameters": [
+          {
+            "name": "label",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Labels to include (e.g. human, persona)",
+              "title": "Label"
+            },
+            "description": "Labels to include (e.g. human, persona)"
+          },
+          {
+            "name": "templates_only",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Whether to include only templates",
+              "default": true,
+              "title": "Templates Only"
+            },
+            "description": "Whether to include only templates"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Name of the block",
+              "title": "Name"
+            },
+            "description": "Name of the block"
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Block"
+                  },
+                  "title": "Response List Memory Blocks"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "blocks"
+        ],
+        "summary": "Create Block",
+        "operationId": "create_memory_block",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBlock"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Block"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/blocks/{block_id}": {
+      "patch": {
+        "tags": [
+          "blocks"
+        ],
+        "summary": "Update Block",
+        "operationId": "update_memory_block",
+        "parameters": [
+          {
+            "name": "block_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Block Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBlock"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Block"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "blocks"
+        ],
+        "summary": "Delete Block",
+        "operationId": "delete_memory_block",
+        "parameters": [
+          {
+            "name": "block_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Block Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Block"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "blocks"
+        ],
+        "summary": "Get Block",
+        "operationId": "get_memory_block",
+        "parameters": [
+          {
+            "name": "block_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Block Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Block"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/jobs/": {
+      "get": {
+        "tags": [
+          "jobs"
+        ],
+        "summary": "List Jobs",
+        "description": "List all jobs.",
+        "operationId": "list_jobs",
+        "parameters": [
+          {
+            "name": "source_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only list jobs associated with the source.",
+              "title": "Source Id"
+            },
+            "description": "Only list jobs associated with the source."
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Job"
+                  },
+                  "title": "Response List Jobs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/jobs/active": {
+      "get": {
+        "tags": [
+          "jobs"
+        ],
+        "summary": "List Active Jobs",
+        "description": "List all active jobs.",
+        "operationId": "list_active_jobs",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Job"
+                  },
+                  "title": "Response List Active Jobs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/jobs/{job_id}": {
+      "get": {
+        "tags": [
+          "jobs"
+        ],
+        "summary": "Get Job",
+        "description": "Get the status of a job.",
+        "operationId": "get_job",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "jobs"
+        ],
+        "summary": "Delete Job",
+        "description": "Delete a job by its job_id.",
+        "operationId": "delete_job",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/health/": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Health Check",
+        "operationId": "health_check",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Health"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/admin/users/": {
+      "get": {
+        "tags": [
+          "users",
+          "admin",
+          "admin"
+        ],
+        "summary": "List Users",
+        "description": "Get a list of all users in the database",
+        "operationId": "list_users",
+        "parameters": [
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": 50,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  },
+                  "title": "Response List Users"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "users",
+          "admin",
+          "admin"
+        ],
+        "summary": "Create User",
+        "description": "Create a new user in the database",
+        "operationId": "create_user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "users",
+          "admin",
+          "admin"
+        ],
+        "summary": "Update User",
+        "description": "Update a user in the database",
+        "operationId": "update_user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "users",
+          "admin",
+          "admin"
+        ],
+        "summary": "Delete User",
+        "operationId": "delete_user",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The user_id key to be deleted.",
+              "title": "User Id"
+            },
+            "description": "The user_id key to be deleted."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/admin/users/keys": {
+      "post": {
+        "tags": [
+          "users",
+          "admin"
+        ],
+        "summary": "Create New Api Key",
+        "description": "Create a new API key for a user",
+        "operationId": "create_api_key",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/APIKeyCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIKey"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "users",
+          "admin"
+        ],
+        "summary": "Get Api Keys",
+        "description": "Get a list of all API keys for a user",
+        "operationId": "list_api_keys",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique identifier of the user.",
+              "title": "User Id"
+            },
+            "description": "The unique identifier of the user."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/APIKey"
+                  },
+                  "title": "Response List Api Keys"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "users",
+          "admin"
+        ],
+        "summary": "Delete Api Key",
+        "operationId": "delete_api_key",
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The API key to be deleted.",
+              "title": "Api Key"
+            },
+            "description": "The API key to be deleted."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIKey"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/admin/orgs/": {
+      "get": {
+        "tags": [
+          "organization",
+          "admin",
+          "admin"
+        ],
+        "summary": "Get All Orgs",
+        "description": "Get a list of all orgs in the database",
+        "operationId": "list_orgs",
+        "parameters": [
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": 50,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Organization"
+                  },
+                  "title": "Response List Orgs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "organization",
+          "admin",
+          "admin"
+        ],
+        "summary": "Create Org",
+        "description": "Create a new org in the database",
+        "operationId": "create_organization",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Organization"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "organization",
+          "admin",
+          "admin"
+        ],
+        "summary": "Delete Org",
+        "operationId": "delete_organization_by_id",
+        "parameters": [
+          {
+            "name": "org_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The org_id key to be deleted.",
+              "title": "Org Id"
+            },
+            "description": "The org_id key to be deleted."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Organization"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/auth": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Authenticate User",
+        "description": "Authenticates the user and sends response with User related data.\n\nCurrently, this is a placeholder that simply returns a UUID placeholder",
+        "operationId": "authenticate_user_v1_auth_post",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateThreadRunRequest"
+                "$ref": "#/components/schemas/AuthRequest"
               }
             }
           },
@@ -1210,482 +3731,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OpenAIRun"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/openai/v1/threads/{thread_id}/runs/{run_id}/steps": {
-      "get": {
-        "tags": [
-          "threads",
-          "runs"
-        ],
-        "summary": "List Run Steps",
-        "operationId": "list_run_steps_openai_v1_threads__thread_id__runs__run_id__steps_get",
-        "parameters": [
-          {
-            "name": "thread_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the thread.",
-              "title": "Thread Id"
-            },
-            "description": "The unique identifier of the thread."
-          },
-          {
-            "name": "run_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the run.",
-              "title": "Run Id"
-            },
-            "description": "The unique identifier of the run."
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "description": "How many run steps to retrieve.",
-              "default": 1000,
-              "title": "Limit"
-            },
-            "description": "How many run steps to retrieve."
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "Order of run steps to retrieve (either 'asc' or 'desc').",
-              "default": "asc",
-              "title": "Order"
-            },
-            "description": "Order of run steps to retrieve (either 'asc' or 'desc')."
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.",
-              "title": "After"
-            },
-            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list."
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.",
-              "title": "Before"
-            },
-            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/OpenAIRunStep"
-                  },
-                  "title": "Response List Run Steps Openai V1 Threads  Thread Id  Runs  Run Id  Steps Get"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/openai/v1/threads/{thread_id}/runs/{run_id}": {
-      "get": {
-        "tags": [
-          "threads",
-          "runs"
-        ],
-        "summary": "Retrieve Run",
-        "operationId": "retrieve_run_openai_v1_threads__thread_id__runs__run_id__get",
-        "parameters": [
-          {
-            "name": "thread_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the thread.",
-              "title": "Thread Id"
-            },
-            "description": "The unique identifier of the thread."
-          },
-          {
-            "name": "run_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the run.",
-              "title": "Run Id"
-            },
-            "description": "The unique identifier of the run."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OpenAIRun"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "threads",
-          "runs"
-        ],
-        "summary": "Modify Run",
-        "operationId": "modify_run_openai_v1_threads__thread_id__runs__run_id__post",
-        "parameters": [
-          {
-            "name": "thread_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the thread.",
-              "title": "Thread Id"
-            },
-            "description": "The unique identifier of the thread."
-          },
-          {
-            "name": "run_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the run.",
-              "title": "Run Id"
-            },
-            "description": "The unique identifier of the run."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ModifyRunRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OpenAIRun"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/openai/v1/threads/{thread_id}/runs/{run_id}/steps/{step_id}": {
-      "get": {
-        "tags": [
-          "threads",
-          "runs"
-        ],
-        "summary": "Retrieve Run Step",
-        "operationId": "retrieve_run_step_openai_v1_threads__thread_id__runs__run_id__steps__step_id__get",
-        "parameters": [
-          {
-            "name": "thread_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the thread.",
-              "title": "Thread Id"
-            },
-            "description": "The unique identifier of the thread."
-          },
-          {
-            "name": "run_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the run.",
-              "title": "Run Id"
-            },
-            "description": "The unique identifier of the run."
-          },
-          {
-            "name": "step_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the run step.",
-              "title": "Step Id"
-            },
-            "description": "The unique identifier of the run step."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OpenAIRunStep"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/openai/v1/threads/{thread_id}/runs/{run_id}/submit_tool_outputs": {
-      "post": {
-        "tags": [
-          "threads",
-          "runs"
-        ],
-        "summary": "Submit Tool Outputs To Run",
-        "operationId": "submit_tool_outputs_to_run_openai_v1_threads__thread_id__runs__run_id__submit_tool_outputs_post",
-        "parameters": [
-          {
-            "name": "thread_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the thread.",
-              "title": "Thread Id"
-            },
-            "description": "The unique identifier of the thread."
-          },
-          {
-            "name": "run_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the run.",
-              "title": "Run Id"
-            },
-            "description": "The unique identifier of the run."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SubmitToolOutputsToRunRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OpenAIRun"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/openai/v1/threads/{thread_id}/runs/{run_id}/cancel": {
-      "post": {
-        "tags": [
-          "threads",
-          "runs"
-        ],
-        "summary": "Cancel Run",
-        "operationId": "cancel_run_openai_v1_threads__thread_id__runs__run_id__cancel_post",
-        "parameters": [
-          {
-            "name": "thread_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the thread.",
-              "title": "Thread Id"
-            },
-            "description": "The unique identifier of the thread."
-          },
-          {
-            "name": "run_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique identifier of the run.",
-              "title": "Run Id"
-            },
-            "description": "The unique identifier of the run."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OpenAIRun"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/openai/v1/chat/completions/": {
-      "post": {
-        "tags": [
-          "chat_completions"
-        ],
-        "summary": "Create Chat Completion",
-        "description": "Send a message to a Letta agent via a /chat/completions completion_request\nThe bearer token will be used to identify the user.\nThe 'user' field in the completion_request should be set to the agent ID.",
-        "operationId": "create_chat_completion_openai_v1_chat_completions__post",
-        "parameters": [
-          {
-            "name": "user_id",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "User Id"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ChatCompletionRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ChatCompletionResponse"
+                  "$ref": "#/components/schemas/AuthResponse"
                 }
               }
             }
@@ -5071,7 +7117,7 @@
             "type": "string",
             "title": "Name",
             "description": "The name of the organization.",
-            "default": "BenevolentTruffle"
+            "default": "GraciousNotebook"
           },
           "created_at": {
             "anyOf": [

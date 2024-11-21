@@ -1,1 +1,1 @@
-"Based on the summaries of the files you've provided, I have grouped them in the following way:\n\nGroup 1 (Objects and Technology): [\"shoe.txt\", \"tv.txt\"]\n\nGroup 2 (Living Creatures): [\"fish.txt\", \"bird.txt\", \"apple.txt\", \"dog.txt\", \"lemon.txt\"]"
+"It seems there may have been an error with your query. You provide a set of instructions to group files into a template, but no actual list of files was included in the message. Could you please provide the list of files that you want me to group?"

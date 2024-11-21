@@ -1,12 +1,10 @@
 import os, json
-from summarize import FileTools
+from tools import extract_file_content, summarize_file_content
 from letta import EmbeddingConfig, LLMConfig, create_client
 
 
 def createFile(data, location):
-        file_tools = FileTools()
-        # print("location: ", location)
-        response = file_tools.summarize_file_content(location)
+        response = summarize_file_content(location)
         file = {
             "type" : "file",
             "summary": response,
@@ -29,18 +27,16 @@ This file creates a data table of files
 def create_table(directory):
     client = create_client()
 
-    # set automatic defaults for LLM/embedding config
     client.set_default_llm_config(LLMConfig.default_config(model_name="letta"))
     client.set_default_embedding_config(EmbeddingConfig.default_config(model_name="text-embedding-ada-002"))
 
-    # print(type(client.get_agent_id(agent_name="file_extraction_agent")))
-    # print(client.get_agent(agent_name="file_extraction_agent"))
     if client.get_agent_id(agent_name="file_extraction_agent"):
         client.delete_agent(client.get_agent_id("file_extraction_agent"))
 
-    file_tools = FileTools()
+    # file_tools = FileTools()
 
-    file_extraction_tool = client.create_tool(FileTools.extract_file_content)
+    # file_extraction_tool = client.create_tool(FileTools.extract_file_content)
+    file_extraction_tool = client.create_tool(extract_file_content)
 
     file_extraction_agent_state = client.create_agent(
         name="file_extraction_agent",

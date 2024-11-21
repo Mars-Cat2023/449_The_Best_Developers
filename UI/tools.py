@@ -40,30 +40,27 @@ def extract_file_content(self, file_path: str) -> str:
     try:
         if ftype == "text/plain":
             # Text files
-            with open(file_path, "r") as file:
+            with open(file_path, 'r') as file:
                 content = file.read()
         elif ftype == "application/pdf":
             # PDF files
-            with open(file_path, "rb") as file:
+            with open(file_path, 'rb') as file:
                 pdf_reader = PyPDF2.PdfReader(file)
-                content = "\n".join(
-                    page.extract_text() for page in pdf_reader.pages
-                )
+                content = "\n".join(page.extract_text() for page in pdf_reader.pages)
         else:
             print(f"Unsupported file type: {ftype}")
             return None
 
         # Limit the content to the first 1000 characters (or any number you prefer)
-        max_length = 1000
+        max_length = 50
         content_snippet = content[:max_length]
-
+        
         print(f"Extracted content snippet from {file_path}")
         return content_snippet
 
     except Exception as e:
         print(f"An error occurred while reading the file: {str(e)}")
         return None
-
 
 def summarize_file_content(self, file_path: str) -> str:
     """
@@ -80,22 +77,18 @@ def summarize_file_content(self, file_path: str) -> str:
         return "No content to summarize."
 
     # Send the content to Letta for summarization
-    response = json.loads(
-        str(
-            client.send_message(
-                agent_id=client.get_agent_id("file_extraction_agent"),
-                role="user",
-                message=f"Extract and summarize the content from the following file path: {file_path}. Provide an objective, assured summary without first-person or second-person language.",
-            )
-        )
-    )
+    response = json.loads(str(client.send_message(
+        agent_id=client.get_agent_id("file_extraction_agent"),
+        role="user",
+        message=f"Extract and summarize the content from the following file path: {file_path}. Provide an objective, assured summary without first-person or second-person language."
+    )))
     # print(response)
     for i in response["messages"]:
         if i["message_type"] == "function_call":
             if i["function_call"]["name"] == "send_message":
                 s = i["function_call"]["arguments"]
                 print(s)
-                return s.replace('{\n  "message": "', "").replace('"\n}', "")
+                return s.replace('{\n  \"message\": \"', '').replace('\"\n}', '')
     return "File summary unavailable"
 
 

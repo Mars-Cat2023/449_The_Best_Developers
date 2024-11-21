@@ -5071,7 +5071,7 @@
             "type": "string",
             "title": "Name",
             "description": "The name of the organization.",
-            "default": "BenevolentTruffle"
+            "default": "GraciousNotebook"
           },
           "created_at": {
             "anyOf": [
