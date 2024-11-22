@@ -1,4 +1,0 @@
-Here is the link to our github repository for our code.
-https://github.com/Mars-Cat2023/449_The_Best_Developers/tree/refactor
-
-The main implementation is in the UI
