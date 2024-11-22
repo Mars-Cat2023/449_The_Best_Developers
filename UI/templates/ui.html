@@ -19,11 +19,20 @@
             </div>
         </div>
 
-        <ul id="tree"></ul>
+
+        <!-- <div id="fileUploader"></div> -->
+        <div id="directory-picker">
+            <input type="text" id="directory-input" placeholder="Enter directory" />
+            <button id="directory-go">Go</button>
+        </div>
+
+        <div id="new-filesys-msg"></div>
+
+        <ul id="tree">Loading...</ul>
 
         <script src="{{ url_for('static', filename='js/filetree.js') }}"></script>
 
-        <div id="fileUploader"></div>
+        <script src="{{ url_for('static', filename='js/directory_picker.js') }}"></script>
     </div>
 
     <div class="chatbox-full">

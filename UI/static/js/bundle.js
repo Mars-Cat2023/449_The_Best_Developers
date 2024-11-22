@@ -31,6 +31,30 @@ __webpack_require__.r(__webpack_exports__);
 
 dayjs__WEBPACK_IMPORTED_MODULE_2___default().extend((dayjs_plugin_relativeTime__WEBPACK_IMPORTED_MODULE_3___default()));
 dayjs__WEBPACK_IMPORTED_MODULE_2___default().extend((dayjs_plugin_utc__WEBPACK_IMPORTED_MODULE_4___default()));
+function newTree() {
+  var d = "new_dir_org.json";
+  var json = JSON.stringify({
+    'input': d
+  });
+  console.log(json);
+  fetch('/newfiletree', {
+    credentials: "same-origin",
+    method: "post",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: json
+  }).then(function (response) {
+    return response.json();
+  }).then(function (data) {
+    treeData = data; // Save the full tree data
+    displayTree(treeData); // Display the entire tree initially
+  })["catch"](function (error) {
+    return console.error('Error loading JSON:', error);
+  });
+  var tr = document.getElementById('new-filesys-msg');
+  tr.innerHTML = 'New organization:';
+}
 function ChatForm(_ref) {
   var setMessages = _ref.setMessages;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
@@ -65,7 +89,7 @@ function ChatForm(_ref) {
       if (!response.ok) throw Error(response.statusText);
       return response.json();
     }).then(function () {
-      // update the commentslist on the ppage
+      // update the chatlist on the ppage
       url = "/api/v1/chat";
       fetch(url, {
         credentials: "same-origin"
@@ -75,6 +99,11 @@ function ChatForm(_ref) {
       }).then(function (data) {
         setMessages(data["messages"]);
         setSomething("");
+        if (data["new-filesys"]) {
+          // HERE IS WHERE WE UPDATE
+          newTree();
+          // we will need to grab  a component by id and change it, perhaps the new filetree structure and slap a new file in there
+        }
       })["catch"](function (error) {
         return console.log(error);
       });
@@ -187,33 +216,29 @@ function FileUploader() {
     console.log(fileUploaded.name);
     document.getElementById("upload-formt").submit(handleSubmit);
   };
-  function handleSubmit(e) {
-    // Prevent the browser from reloading the page
-    e.preventDefault();
-    console.log(e);
-    // Read the form data
-    var form = e.target;
-    var formData = new FormData(form);
-    var shit = Object.fromEntries(formData.entries());
+  // function handleSubmit(e) {
+  //   // Prevent the browser from reloading the page
+  //   e.preventDefault();
 
-    // agent = `agent-a70f49e9-ed6d-48d4-ac04-26ec4c2908fa`;
-    // let url = `http://localhost:8283/v1/agents/${String(agent)}/messages`;
-    // let url = `/api/v1/comments/?postid=${String(postId)}`;
+  //   console.log(e)
+  //   // Read the form data
+  //   const form = e.target;
+  //   const formData = new FormData(form);
+  //   const shit = Object.fromEntries(formData.entries());
 
-    var url = "/upload";
+  //   let url = "/upload";
 
-    // prep json and send req to api to update databse
-    var json = JSON.stringify(shit);
-    fetch(url, {
-      credentials: "same-origin",
-      method: form.method,
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: json
-    });
-  }
-  ;
+  //   // prep json and send req to api to update databse
+  //   const json = JSON.stringify(shit);
+  //   fetch(url, {
+  //     credentials: "same-origin",
+  //     method: form.method,
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: json,
+  //   })
+  // };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
     id: "upload-formt",
     action: "/upload",
@@ -34993,8 +35018,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // upload button
-var upload = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(document.getElementById("fileUploader"));
-upload.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_upload__WEBPACK_IMPORTED_MODULE_3__.FileUploader, null)));
+// const upload = createRoot(document.getElementById("fileUploader"));
+// upload.render(
+//     <StrictMode>
+//         <FileUploader />
+//     </StrictMode>
+// );
 
 // Chatbox
 var root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(document.getElementById("reactEntry"));

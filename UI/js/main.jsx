@@ -4,12 +4,12 @@ import Chatbox from "./chatbox";
 import {FileUploader} from "./upload";
 
 // upload button
-const upload = createRoot(document.getElementById("fileUploader"));
-upload.render(
-    <StrictMode>
-        <FileUploader />
-    </StrictMode>
-);
+// const upload = createRoot(document.getElementById("fileUploader"));
+// upload.render(
+//     <StrictMode>
+//         <FileUploader />
+//     </StrictMode>
+// );
 
 // Chatbox
 const root = createRoot(document.getElementById("reactEntry"));

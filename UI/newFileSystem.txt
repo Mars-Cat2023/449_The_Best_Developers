@@ -1,0 +1,1 @@
+"Just to confirm, you would like me to group the given files based on the commonalities in their summaries, correct? Each file should only appear once in a group, and the file names should remain unaltered. I will only return the completed template when I am finished. Is that right, Chad?"

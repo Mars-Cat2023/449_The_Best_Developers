@@ -17,29 +17,29 @@ export function FileUploader() {  // Create a reference to the hidden file input
       document.getElementById("upload-formt").submit(handleSubmit);
 
     };
-    function handleSubmit(e) {
-      // Prevent the browser from reloading the page
-      e.preventDefault();
+    // function handleSubmit(e) {
+    //   // Prevent the browser from reloading the page
+    //   e.preventDefault();
   
-      console.log(e)
-      // Read the form data
-      const form = e.target;
-      const formData = new FormData(form);
-      const shit = Object.fromEntries(formData.entries());
+    //   console.log(e)
+    //   // Read the form data
+    //   const form = e.target;
+    //   const formData = new FormData(form);
+    //   const shit = Object.fromEntries(formData.entries());
   
-      let url = "/upload";
+    //   let url = "/upload";
   
-      // prep json and send req to api to update databse
-      const json = JSON.stringify(shit);
-      fetch(url, {
-        credentials: "same-origin",
-        method: form.method,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: json,
-      })
-    };
+    //   // prep json and send req to api to update databse
+    //   const json = JSON.stringify(shit);
+    //   fetch(url, {
+    //     credentials: "same-origin",
+    //     method: form.method,
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: json,
+    //   })
+    // };
     return (
       <form id="upload-formt" action="/upload" method="post" enctype="multipart/form-data" onSubmit={handleSubmit}>
         <button className="button-upload" onClick={handleClick}>
