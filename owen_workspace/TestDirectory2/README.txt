@@ -1,1 +1,0 @@
-This directory is different from TestDirectory from using files from "resources" to get content.
