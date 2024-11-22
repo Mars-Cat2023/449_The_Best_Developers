@@ -12,7 +12,7 @@ from letta import create_client, EmbeddingConfig, LLMConfig
 ## sort_FS3
 
 
-def extract_file_content(file_path: str) -> str:
+def extract_file_content(self, file_path: str) -> str:
     """
     Extracts content from a text-based file, limiting the amount of content returned.
 
@@ -59,7 +59,7 @@ def extract_file_content(file_path: str) -> str:
         print(f"An error occurred while reading the file: {str(e)}")
         return None
 
-def summarize_file_content(file_path: str) -> str:
+def summarize_file_content(self, file_path: str) -> str:
     """
     Extracts and summarizes the content from a file.
 
@@ -89,7 +89,7 @@ def summarize_file_content(file_path: str) -> str:
     return "File summary unavailable"
 
 
-def garbage_suggestion():
+def garbage_suggestion(self):
     """
     Goes through the summaries of all files and determines which may be fit for deletion.
     If prompted to recommend files to delete or which files may be garbage, call this function.
@@ -155,7 +155,7 @@ def garbage_suggestion():
     return response
 
 
-def query(keyword: str):
+def query(self, keyword: str):
     """
     Extracts file summaries and their paths from a JSON data table.
     If prompted to find files related to some keywords, use this function. DO NOT USE archival_memory_search.
@@ -406,7 +406,7 @@ def sort_message(mode: str):
     return prompt + enforceSingle + template
 
 
-def sort_FS(mode: str):
+def sort_FS(self, mode: str):
     """
     This tool sorts the user's file system. If asked to sort or to organize the file system, call this function.Tell the user the return and results of the function call. This function has a required argument, mode. This argument is required and must be filled. For example, if users say "sort files by content", set mode to "content" when calling this function.
 
@@ -496,7 +496,7 @@ def sort_FS(mode: str):
     return answer
 
 
-def sort_FS1():
+def sort_FS1(self):
     """
     This tool sorts the user's file system. If asked to sort or to organize the file system by the NAMES and/or TITLE of the files, call this function. Tell the user the return and results of the function call. This function has a required argument, mode. This argument is required and must be filled. For example, if users say "sort files by content", set mode to "content" when calling this function.
 
@@ -555,7 +555,7 @@ def sort_FS1():
     return answer
 
 
-def sort_FS2():
+def sort_FS2(self):
     """
     This tool sorts the user's file system. If asked to sort or to organize based on the EXTENSIONS of the files, call this function. Tell the user the return and results of the function call. This function has a required argument, mode. This argument is required and must be filled. For example, if users say "sort files by content", set mode to "content" when calling this function.
 
@@ -615,7 +615,7 @@ def sort_FS2():
     return answer
 
 
-def sort_FS3():
+def sort_FS3(self):
     """
     This tool sorts the user's file system. If asked to sort or to organize the file system based on the SUMMARIES of the files, then call this function. Tell the user the return and results of the function call. This function has a required argument, mode. This argument is required and must be filled. For example, if users say "sort files by content", set mode to "content" when calling this function.
 

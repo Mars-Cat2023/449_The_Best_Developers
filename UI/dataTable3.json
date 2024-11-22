@@ -1,1 +1,62 @@
-{}
+{
+    "shoe.txt": {
+        "type": "file",
+        "summary": "The file in question discusses the importance of comfortable footwear in relation to long-distance.",
+        "path": "../TestDirectory3/shoe.txt",
+        "data": 1
+    },
+    "tv.txt": {
+        "type": "file",
+        "summary": "The extracted content suggests that binge-watching favorite TV shows can be an enjoyable activity.",
+        "path": "../TestDirectory3/tv.txt",
+        "data": 1
+    },
+    "apple.pdf": {
+        "type": "file",
+        "summary": "The file content is about a publication titled 'MemGPT: Towards LLMs as Operating Systems' by an author named Charles.",
+        "path": "../TestDirectory3/apple.pdf",
+        "data": 1
+    },
+    "fish.txt": {
+        "type": "file",
+        "summary": "The document highlights the diversity of fish and their omnipresence in various ecosystems.",
+        "path": "../TestDirectory3/fish.txt",
+        "data": 1
+    },
+    "Paper1-Word2Vec.pdf": {
+        "type": "file",
+        "summary": "The file content pertains to the efficient estimation of word representations in vector space.",
+        "path": "../TestDirectory3/Paper1-Word2Vec.pdf",
+        "data": 1
+    },
+    "fish.pdf": {
+        "type": "file",
+        "summary": "The document content pertains to a work titled 'MemGPT: Towards LLMs as Operating Systems', attributed to an author named Charles.",
+        "path": "../TestDirectory3/fish.pdf",
+        "data": 1
+    },
+    "bird.txt": {
+        "type": "file",
+        "summary": "The document touches upon the transformative power of a bird's melodic songs.",
+        "path": "../TestDirectory3/test1/bird.txt",
+        "data": 1
+    },
+    "apple.txt": {
+        "type": "file",
+        "summary": "The file content posits a nuanced perspective on the common saying that an apple a day might not entirely keep the doctor away.",
+        "path": "../TestDirectory3/test1/apple.txt",
+        "data": 1
+    },
+    "dog.txt": {
+        "type": "file",
+        "summary": "The content underlines the immense joy and companionship a loyal dog can provide.",
+        "path": "../TestDirectory3/test2/dog.txt",
+        "data": 1
+    },
+    "lemon.txt": {
+        "type": "file",
+        "summary": "The text suggests that adding a slice of lemon to water can enhance not only the taste but potentially provide further benefits.",
+        "path": "../TestDirectory3/test2/lemon.txt",
+        "data": 1
+    }
+}

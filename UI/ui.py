@@ -21,7 +21,7 @@ client.set_default_embedding_config(
 
 agentname = client.get_agent_id(
     agent_name="FileMindr"
-)  # "agent-a70f49e9-ed6d-48d4-ac04-26ec4c2908fa"
+)
 
 
 @app.route("/")
