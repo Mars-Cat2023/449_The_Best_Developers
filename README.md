@@ -17,12 +17,6 @@ letta server
 python tools.py
 ```
 
-* Start up FileMindr:
-    * Windows:
-```
-./runui
-```
-    * MacOS:
-```
-sh ./runui
-```
+* Start up FileMindr in:
+    * Windows: ``` ./runui ```
+    * MacOS: ``` sh ./runui ```
