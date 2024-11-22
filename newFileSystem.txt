@@ -1,1 +1,0 @@
-"Based on the summaries of the files you've provided, I have grouped them in the following way:\n\nGroup 1 (Objects and Technology): [\"shoe.txt\", \"tv.txt\"]\n\nGroup 2 (Living Creatures): [\"fish.txt\", \"bird.txt\", \"apple.txt\", \"dog.txt\", \"lemon.txt\"]"
